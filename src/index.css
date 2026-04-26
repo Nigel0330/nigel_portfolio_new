@@ -36,3 +36,12 @@ body {
   background: #c9a96e;
   color: #0a0a0f;
 }
+
+@keyframes spinGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

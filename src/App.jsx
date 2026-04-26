@@ -21,7 +21,6 @@ function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
-
       const sections = ["about", "skills", "projects", "experience", "contact"];
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -49,15 +48,12 @@ function Navbar() {
       }}
     >
       <div className="max-w-6xl mx-auto px-8 flex justify-between items-center">
-        {/* Logo */}
         <a
           href="#hero"
           className="font-display text-2xl font-semibold text-paper tracking-tight"
         >
           N<span className="text-gold">.</span>
         </a>
-
-        {/* Links */}
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link) => {
             const id = link.toLowerCase();
@@ -78,20 +74,13 @@ function Navbar() {
             );
           })}
         </nav>
-
-        {/* CTA */}
         <a
           href="#contact"
           className="hidden md:inline-flex px-5 py-2.5 border border-gold text-gold font-mono text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300"
         >
           Hire Me
         </a>
-
-        {/* Mobile menu icon */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-1"
-          onClick={() => {}}
-        >
+        <button className="md:hidden flex flex-col gap-1.5 p-1">
           <span className="w-5 h-px bg-paper block" />
           <span className="w-5 h-px bg-paper block" />
           <span className="w-3 h-px bg-gold block" />
@@ -116,9 +105,7 @@ function Hero() {
 
   useEffect(() => {
     lines.forEach((line, i) => {
-      setTimeout(() => {
-        setVisible((prev) => [...prev, i]);
-      }, line.delay);
+      setTimeout(() => setVisible((prev) => [...prev, i]), line.delay);
     });
     const blink = setInterval(() => setCursor((c) => !c), 500);
     return () => clearInterval(blink);
@@ -131,7 +118,6 @@ function Hero() {
     >
       <div className="max-w-6xl mx-auto w-full relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-start mb-16">
-          {/* Left */}
           <div>
             <h1
               className="font-display font-semibold text-paper mb-6"
@@ -144,12 +130,10 @@ function Hero() {
               Nigel <br />
               <span className="text-gold italic">Hernandez.</span>
             </h1>
-
             <p className="text-muted text-lg max-w-lg leading-relaxed font-light mb-12">
               Full-Stack Developer crafting thoughtful digital experiences.
               Clean code, sharp interfaces, real impact.
             </p>
-
             <div className="flex flex-wrap gap-6 items-center">
               <a
                 href="#projects"
@@ -165,8 +149,6 @@ function Hero() {
               </a>
             </div>
           </div>
-
-          {/* Right — Terminal */}
           <div className="hidden md:block">
             <div className="border border-border bg-surface overflow-hidden">
               <div
@@ -232,8 +214,6 @@ function Hero() {
             </div>
           </div>
         </div>
-
-        {/* Stats */}
         <div className="py-12 border-t border-border flex flex-row gap-12 justify-center">
           {[
             ["3+", "Years Experience"],
@@ -273,6 +253,7 @@ function About() {
       desc: "Every project I take on has a goal — I stay focused on outcomes, not just output.",
     },
   ];
+
   return (
     <section id="about" className="py-32 px-8 border-t border-border">
       <div className="max-w-6xl mx-auto">
@@ -301,45 +282,83 @@ function About() {
             <span className="text-gold italic">gives a damn.</span>
           </h2>
         </div>
+
         <div className="grid md:grid-cols-2 gap-16 mb-20">
-          <div className="relative">
-            <div className="aspect-[4/5] bg-surface border border-border relative overflow-hidden flex items-center justify-center">
-              <div className="text-center">
-                <div className="font-display text-7xl text-border mb-3">NH</div>
-                <div className="font-mono text-xs text-muted tracking-widest">
-                  your photo here
+          {/* Photo — rounded portrait with spinning gradient ring */}
+          <div className="flex justify-center items-start pt-4">
+            <div className="relative">
+              {/* Soft glow behind */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: -24,
+                  borderRadius: "50%",
+                  background:
+                    "radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%)",
+                  filter: "blur(20px)",
+                  zIndex: 0,
+                }}
+              />
+
+              {/* Spinning conic gradient ring */}
+              <div
+                style={{
+                  position: "relative",
+                  zIndex: 1,
+                  padding: 3,
+                  borderRadius: "50%",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    borderRadius: "50%",
+                    background:
+                      "conic-gradient(from 0deg, #c9a96e, #e8d5b0, #6b6b7a, #0a0a0f, #c9a96e)",
+                    animation: "spinGradient 4s linear infinite",
+                  }}
+                />
+
+                {/* Inner circle */}
+                <div
+                  style={{
+                    width: 280,
+                    height: 280,
+                    borderRadius: "50%",
+                    background: "#13131a",
+                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  {/* Inner glow */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "radial-gradient(circle at 50% 30%, rgba(201,169,110,0.1) 0%, transparent 70%)",
+                    }}
+                  />
+                  {/* Placeholder — replace with <img> later */}
+                  <div className="text-center relative z-10">
+                    <div className="font-display text-6xl text-muted mb-2">
+                      NH
+                    </div>
+                    <div className="font-mono text-xs text-muted tracking-widest">
+                      your photo
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: 48,
-                  height: 48,
-                  borderTop: "1px solid #c9a96e",
-                  borderLeft: "1px solid #c9a96e",
-                  opacity: 0.7,
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  right: 0,
-                  width: 48,
-                  height: 48,
-                  borderBottom: "1px solid #c9a96e",
-                  borderRight: "1px solid #c9a96e",
-                  opacity: 0.7,
-                }}
-              />
             </div>
-            <div
-              className="absolute border border-border -z-10"
-              style={{ inset: 0, transform: "translate(12px, 12px)" }}
-            />
           </div>
+
+          {/* Bio */}
           <div className="flex flex-col justify-center gap-6 text-muted leading-relaxed font-light text-base">
             <p>
               Hey, I am{" "}
@@ -368,6 +387,7 @@ function About() {
             </div>
           </div>
         </div>
+
         <div className="grid md:grid-cols-3 gap-6">
           {highlights.map((item) => (
             <div
