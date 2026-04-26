@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import photo from "./assets/profile.jpg";
 
 export default function App() {
   return (
@@ -305,8 +306,9 @@ function About() {
                 style={{
                   position: "relative",
                   zIndex: 1,
-                  padding: 3,
+                  padding: 6,
                   borderRadius: "50%",
+                  background: "#0a0a0f",
                 }}
               >
                 <div
@@ -344,15 +346,16 @@ function About() {
                         "radial-gradient(circle at 50% 30%, rgba(201,169,110,0.1) 0%, transparent 70%)",
                     }}
                   />
-                  {/* Placeholder — replace with <img> later */}
-                  <div className="text-center relative z-10">
-                    <div className="font-display text-6xl text-muted mb-2">
-                      NH
-                    </div>
-                    <div className="font-mono text-xs text-muted tracking-widest">
-                      your photo
-                    </div>
-                  </div>
+                  <img
+                    src={photo}
+                    alt="Nigel Hernandez"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center 20%",
+                    }}
+                  />
                 </div>
               </div>
             </div>
