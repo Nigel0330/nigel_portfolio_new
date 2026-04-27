@@ -239,22 +239,6 @@ function Hero() {
             </div>
           </div>
         </div>
-        <div className="py-12 border-t border-border flex flex-row gap-12 justify-center">
-          {[
-            ["3+", "Years Experience"],
-            ["20+", "Projects Delivered"],
-            ["10+", "Happy Clients"],
-          ].map(([num, label]) => (
-            <div key={label} className="text-center">
-              <div className="font-display text-5xl font-semibold text-paper">
-                {num}
-              </div>
-              <div className="font-mono text-sm text-muted tracking-widest uppercase mt-2">
-                {label}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -302,9 +286,9 @@ function About() {
               letterSpacing: "-0.02em",
             }}
           >
-            A developer who
+            Where design meets
             <br />
-            <span className="text-gold italic">gives a damn.</span>
+            <span className="text-gold italic"> development.</span>
           </h2>
         </div>
 
@@ -485,18 +469,18 @@ function Skills() {
       category: "Backend",
       skills: [
         { name: "Node.js / Express", level: 80 },
-        { name: "Python / FastAPI", level: 75 },
+        { name: "Python", level: 75 },
         { name: "PostgreSQL", level: 72 },
-        { name: "REST / GraphQL", level: 78 },
+        { name: "REST", level: 78 },
       ],
     },
     {
       category: "Tools",
       skills: [
         { name: "Git / GitHub", level: 92 },
-        { name: "Docker", level: 70 },
+        { name: "VS Code", level: 70 },
         { name: "Figma", level: 80 },
-        { name: "Vercel / Netlify", level: 85 },
+        { name: "Vercel", level: 85 },
       ],
     },
   ];
@@ -988,12 +972,9 @@ function Contact() {
             )}
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-border flex flex-wrap justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-border flex justify-center">
           <p className="font-mono text-xs text-muted tracking-widest">
             Nigel Hernandez — 2026
-          </p>
-          <p className="font-mono text-xs text-muted tracking-widest">
-            Built with React + Tailwind
           </p>
         </div>
       </div>
