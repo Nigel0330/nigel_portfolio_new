@@ -548,35 +548,20 @@ function Projects() {
   const projects = [
     {
       num: "01",
-      title: "Project Alpha",
-      desc: "A full-stack web application with real-time data sync, user authentication, and a responsive dashboard built for speed and scale.",
-      tags: ["React", "Node.js", "PostgreSQL"],
-      live: "#",
-      repo: "#",
+      title: "Portfolio for Photography",
+      desc: "A clean and responsive photography portfolio website built with HTML and CSS, designed to showcase visual work with elegance and clarity. Focused on minimal design, smooth navigation, and an immersive viewing experience.",
+      tags: ["HTML", "CSS", "JavaScript"],
+      live: "https://www.droldanphotography.com",
+      repo: "https://github.com/Nigel0330/portfolio_photography",
     },
+
     {
       num: "02",
-      title: "Project Beta",
-      desc: "Mobile-first e-commerce platform with dynamic product filtering, cart management, and Stripe payment integration.",
-      tags: ["Next.js", "TypeScript", "Stripe"],
-      live: "#",
-      repo: "#",
-    },
-    {
-      num: "03",
-      title: "Project Gamma",
-      desc: "Data visualization dashboard consuming multiple APIs, rendering interactive charts and exportable reports for business teams.",
-      tags: ["React", "D3.js", "Python"],
-      live: "#",
-      repo: "#",
-    },
-    {
-      num: "04",
-      title: "Project Delta",
-      desc: "CLI tool for automating deployment workflows, managing environment variables, and scaffolding new projects in seconds.",
-      tags: ["Node.js", "Shell", "Docker"],
-      live: "#",
-      repo: "#",
+      title: "Management System for A Carshop",
+      desc: "This car shop management system offers a clean, real-time dashboard that tracks key data, prioritizes new clients, and improves efficiency and customer experience.",
+      tags: ["Node Js", "Supabase"],
+      live: "https://car-management-system-seven.vercel.app/login",
+      repo: "https://github.com/Nigel0330/car_management_system.git",
     },
   ];
   return (
@@ -628,12 +613,16 @@ function Projects() {
                   <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <a
                       href={project.repo}
+                      target="_blank"
+                      rel="noreferrer"
                       className="font-mono text-xs text-muted hover:text-paper transition-colors duration-200 tracking-wider uppercase"
                     >
                       Repo
                     </a>
                     <a
                       href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
                       className="font-mono text-xs text-gold tracking-wider uppercase"
                     >
                       Live
