@@ -779,7 +779,9 @@ function Experience() {
             View my full professional background
           </p>
           <a
-            href="#"
+            href="/Nigel_Hernandez_Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
             className="px-7 py-3.5 border border-gold text-gold font-mono text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300"
           >
             Download Resume
