@@ -18,6 +18,7 @@ export default function App() {
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -43,12 +44,14 @@ function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
         padding: scrolled ? "1rem 0" : "1.75rem 0",
-        background: scrolled ? "rgba(10,10,15,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid #1e1e2e" : "1px solid transparent",
+        background:
+          menuOpen || scrolled ? "rgba(10,10,15,0.97)" : "transparent",
+        backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none",
+        borderBottom:
+          scrolled || menuOpen ? "1px solid #1e1e2e" : "1px solid transparent",
       }}
     >
-      <div className="max-w-6xl mx-auto px-8 flex justify-between items-center">
+      <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
         <a
           href="#hero"
           className="logo font-display text-2xl font-semibold text-paper tracking-tight"
@@ -60,6 +63,8 @@ function Navbar() {
           </span>
           <span className="text-gold">.</span>
         </a>
+
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link) => {
             const id = link.toLowerCase();
@@ -80,18 +85,53 @@ function Navbar() {
             );
           })}
         </nav>
+
         <a
           href="#contact"
           className="hidden md:inline-flex px-5 py-2.5 border border-gold text-gold font-mono text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300"
         >
           Hire Me
         </a>
-        <button className="md:hidden flex flex-col gap-1.5 p-1">
-          <span className="w-5 h-px bg-paper block" />
-          <span className="w-5 h-px bg-paper block" />
-          <span className="w-3 h-px bg-gold block" />
+
+        {/* Hamburger */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span
+            className={`w-5 h-px bg-paper block transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+          />
+          <span
+            className={`w-5 h-px bg-paper block transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
+          />
+          <span
+            className={`w-3 h-px bg-gold block transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2 w-5" : ""}`}
+          />
         </button>
       </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="md:hidden px-6 pt-4 pb-8 flex flex-col gap-6 border-t border-border mt-4">
+          {links.map((link) => (
+            <a
+              key={link}
+              href={`#${link.toLowerCase()}`}
+              className="font-mono text-sm tracking-[0.15em] uppercase text-muted hover:text-gold transition-colors duration-200"
+              onClick={() => setMenuOpen(false)}
+            >
+              {link}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            className="inline-flex w-fit px-6 py-3 border border-gold text-gold font-mono text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300 mt-2"
+            onClick={() => setMenuOpen(false)}
+          >
+            Hire Me
+          </a>
+        </div>
+      )}
     </header>
   );
 }
@@ -120,10 +160,10 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center px-8 pt-24 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center px-6 md:px-8 pt-24 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto w-full relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-start mb-16">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start mb-12 md:mb-16">
           <div>
             <h1
               className="font-display font-semibold text-paper mb-6"
@@ -155,14 +195,14 @@ function Hero() {
                 Hernandez.
               </span>
             </h1>
-            <p className="text-muted text-lg max-w-lg leading-relaxed font-light mb-12">
+            <p className="text-muted text-base md:text-lg max-w-lg leading-relaxed font-light mb-10 md:mb-12">
               Full-Stack Developer crafting thoughtful digital experiences.
               Clean code, sharp interfaces, real impact.
             </p>
-            <div className="flex flex-wrap gap-6 items-center">
+            <div className="flex flex-wrap gap-4 md:gap-6 items-center">
               <a
                 href="#projects"
-                className="px-7 py-3.5 border border-gold text-gold font-mono text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300"
+                className="px-6 md:px-7 py-3 md:py-3.5 border border-gold text-gold font-mono text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300"
               >
                 View Work
               </a>
@@ -174,6 +214,8 @@ function Hero() {
               </a>
             </div>
           </div>
+
+          {/* Terminal — hidden on mobile */}
           <div className="hidden md:block">
             <div className="border border-border bg-surface overflow-hidden">
               <div
@@ -264,9 +306,12 @@ function About() {
   ];
 
   return (
-    <section id="about" className="py-32 px-8 border-t border-border">
+    <section
+      id="about"
+      className="py-20 md:py-32 px-6 md:px-8 border-t border-border"
+    >
       <div className="max-w-6xl mx-auto">
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <p className="font-mono text-gold text-xs tracking-[0.2em] uppercase mb-4">
             02 -- About
           </p>
@@ -288,11 +333,11 @@ function About() {
           >
             Where design meets
             <br />
-            <span className="text-gold italic"> development.</span>
+            <span className="text-gold italic">development.</span>
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-16 mb-20">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 mb-12 md:mb-20">
           <div className="flex justify-center items-start pt-4">
             <div className="relative">
               <div
@@ -327,8 +372,8 @@ function About() {
                 />
                 <div
                   style={{
-                    width: 280,
-                    height: 280,
+                    width: 240,
+                    height: 240,
                     borderRadius: "50%",
                     background: "#13131a",
                     overflow: "hidden",
@@ -362,7 +407,7 @@ function About() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center gap-6 text-muted leading-relaxed font-light text-base">
+          <div className="flex flex-col justify-center gap-5 text-muted leading-relaxed font-light text-base">
             <p>
               Hey, I am{" "}
               <span className="text-paper font-medium">Nigel Hernandez</span> —
@@ -391,11 +436,11 @@ function About() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {highlights.map((item) => (
             <div
               key={item.num}
-              className="p-8 border border-border bg-surface hover:border-gold transition-colors duration-300"
+              className="p-6 md:p-8 border border-border bg-surface hover:border-gold transition-colors duration-300"
             >
               <div className="font-mono text-xs text-gold tracking-widest mb-4">
                 {item.num}
@@ -485,9 +530,12 @@ function Skills() {
     },
   ];
   return (
-    <section id="skills" className="py-32 px-8 border-t border-border">
+    <section
+      id="skills"
+      className="py-20 md:py-32 px-6 md:px-8 border-t border-border"
+    >
       <div className="max-w-6xl mx-auto">
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <p className="font-mono text-gold text-xs tracking-[0.2em] uppercase mb-4">
             03 -- Skills
           </p>
@@ -512,7 +560,7 @@ function Skills() {
             <span className="text-gold italic">with.</span>
           </h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
           {groups.map((group) => (
             <div key={group.category}>
               <div className="flex items-center gap-3 mb-8">
@@ -564,9 +612,12 @@ function Projects() {
     },
   ];
   return (
-    <section id="projects" className="py-32 px-8 border-t border-border">
+    <section
+      id="projects"
+      className="py-20 md:py-32 px-6 md:px-8 border-t border-border"
+    >
       <div className="max-w-6xl mx-auto">
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <p className="font-mono text-gold text-xs tracking-[0.2em] uppercase mb-4">
             04 -- Projects
           </p>
@@ -591,11 +642,11 @@ function Projects() {
             <span className="text-gold italic">built.</span>
           </h2>
         </div>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {projects.map((project) => (
             <div
               key={project.num}
-              className="group p-10 border border-border bg-surface hover:border-gold transition-all duration-400 relative overflow-hidden"
+              className="group p-6 md:p-10 border border-border bg-surface hover:border-gold transition-all duration-400 relative overflow-hidden"
             >
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
@@ -630,7 +681,7 @@ function Projects() {
                 </div>
                 <h3
                   className="font-display font-semibold text-paper mb-4 group-hover:text-gold-light transition-colors duration-300"
-                  style={{ fontSize: "1.75rem", letterSpacing: "-0.01em" }}
+                  style={{ fontSize: "1.5rem", letterSpacing: "-0.01em" }}
                 >
                   {project.title}
                 </h3>
@@ -651,7 +702,7 @@ function Projects() {
             </div>
           ))}
         </div>
-        <div className="mt-12 text-center">
+        <div className="mt-10 text-center">
           <p className="text-muted font-mono text-xs tracking-widest uppercase">
             More on{" "}
             <a
@@ -683,10 +734,10 @@ function Experience() {
   return (
     <section
       id="experience"
-      className="pt-32 pb-12 px-8 border-t border-border"
+      className="pt-20 md:pt-32 pb-12 px-6 md:px-8 border-t border-border"
     >
       <div className="max-w-6xl mx-auto">
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <p className="font-mono text-gold text-xs tracking-[0.2em] uppercase mb-4">
             05 -- Experience
           </p>
@@ -715,7 +766,7 @@ function Experience() {
           {jobs.map((job) => (
             <div
               key={job.num}
-              className="group p-10 border border-border bg-surface hover:border-gold transition-all duration-300 relative overflow-hidden"
+              className="group p-6 md:p-10 border border-border bg-surface hover:border-gold transition-all duration-300 relative overflow-hidden"
             >
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -729,7 +780,7 @@ function Experience() {
                   <div>
                     <h3
                       className="font-display font-semibold text-paper mb-1"
-                      style={{ fontSize: "1.6rem", letterSpacing: "-0.01em" }}
+                      style={{ fontSize: "1.4rem", letterSpacing: "-0.01em" }}
                     >
                       {job.role}
                     </h3>
@@ -737,7 +788,7 @@ function Experience() {
                       {job.company}
                     </p>
                   </div>
-                  <div className="font-mono text-xs text-muted tracking-widest border border-border px-4 py-2 self-start">
+                  <div className="font-mono text-xs text-muted tracking-widest border border-border px-3 py-2 self-start">
                     {job.period}
                   </div>
                 </div>
@@ -815,7 +866,7 @@ function Contact() {
     },
   ];
   return (
-    <section id="contact" className="py-12 px-8 border-t border-border">
+    <section id="contact" className="py-12 px-6 md:px-8 border-t border-border">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <p className="font-mono text-gold text-xs tracking-[0.2em] uppercase mb-4">
@@ -842,8 +893,8 @@ function Contact() {
             <span className="text-gold italic">something.</span>
           </h2>
         </div>
-        <div className="grid md:grid-cols-2 gap-20">
-          <div className="flex flex-col gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+          <div className="flex flex-col gap-8 md:gap-10">
             <p className="text-muted leading-relaxed font-light text-base">
               I am currently open to freelance work and full-time opportunities.
               Whether you have a project in mind or just want to say hello — my
@@ -856,7 +907,7 @@ function Contact() {
                 </p>
                 <a
                   href="mailto:nigelhernandez0330@gmail.com"
-                  className="text-paper font-light hover:text-gold transition-colors duration-200"
+                  className="text-paper font-light hover:text-gold transition-colors duration-200 text-sm md:text-base"
                 >
                   nigelhernandez0330@gmail.com
                 </a>
@@ -890,7 +941,7 @@ function Contact() {
           </div>
           <div>
             {sent ? (
-              <div className="h-full flex flex-col items-start justify-center gap-4">
+              <div className="flex flex-col items-start justify-center gap-4 py-8">
                 <div
                   style={{
                     width: 48,
@@ -919,7 +970,7 @@ function Contact() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-10">
+              <form onSubmit={handleSubmit} className="space-y-8 md:space-y-10">
                 <div>
                   <label className="font-mono text-xs text-muted tracking-widest uppercase block mb-3">
                     Name
@@ -964,7 +1015,7 @@ function Contact() {
                 </div>
                 <button
                   type="submit"
-                  className="px-7 py-3.5 border border-gold text-gold font-mono text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300"
+                  className="w-full md:w-auto px-7 py-3.5 border border-gold text-gold font-mono text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300"
                 >
                   Send Message
                 </button>
