@@ -45,3 +45,29 @@ body {
     transform: rotate(360deg);
   }
 }
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-h {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  vertical-align: baseline;
+  transition:
+    max-width 0.3s ease,
+    opacity 0.3s ease;
+}
+.logo:hover .logo-h {
+  max-width: 20px;
+  opacity: 1;
+}

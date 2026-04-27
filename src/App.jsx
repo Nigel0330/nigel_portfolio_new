@@ -51,9 +51,14 @@ function Navbar() {
       <div className="max-w-6xl mx-auto px-8 flex justify-between items-center">
         <a
           href="#hero"
-          className="font-display text-2xl font-semibold text-paper tracking-tight"
+          className="logo font-display text-2xl font-semibold text-paper tracking-tight"
+          style={{ display: "inline-flex", alignItems: "baseline" }}
         >
-          N<span className="text-gold">.</span>
+          N
+          <span className="logo-h" style={{ lineHeight: 1 }}>
+            H
+          </span>
+          <span className="text-gold">.</span>
         </a>
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link) => {
@@ -128,8 +133,27 @@ function Hero() {
                 letterSpacing: "-0.03em",
               }}
             >
-              Nigel <br />
-              <span className="text-gold italic">Hernandez.</span>
+              <span
+                style={{
+                  display: "block",
+                  opacity: 0,
+                  transform: "translateY(40px)",
+                  animation: "fadeUp 0.9s 0.2s ease forwards",
+                }}
+              >
+                Nigel
+              </span>
+              <span
+                className="text-gold italic"
+                style={{
+                  display: "block",
+                  opacity: 0,
+                  transform: "translateY(40px)",
+                  animation: "fadeUp 0.9s 0.5s ease forwards",
+                }}
+              >
+                Hernandez.
+              </span>
             </h1>
             <p className="text-muted text-lg max-w-lg leading-relaxed font-light mb-12">
               Full-Stack Developer crafting thoughtful digital experiences.
