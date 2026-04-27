@@ -771,9 +771,18 @@ function Contact() {
   const [sent, setSent] = useState(false);
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) setSent(true);
+    } catch (err) {
+      console.error(err);
+    }
   };
   const socials = [
     {
